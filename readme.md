@@ -32,27 +32,22 @@ env.Load(filePath)
 获取所有配置可以使用 `AllSettings() : map[string]interface{}`
 
 ## 例子
-使用`json`当配置文件：
-```json
-{
-  "host": {
-      "address": "localhost",
-      "port": 5799
-  },
-  "datastore": {
-      "metric": {
-          "host": "127.0.0.1",
-          "port": 3099
-      },
-      "warehouse": {
-          "host": "198.0.0.1",
-          "port": 2112
-      }
-  }
-}
+使用[toml](https://github.com/toml-lang/toml)格式的配置文件
+```toml
+# This is a TOML document.
+
+title = "TOML Example"
+
+[database]
+server = "192.168.1.1"
+ports = [ 8001, 8001, 8002 ]
+connection_max = 5000
+enabled = true
 ```
 
 ```go
-GetString("datastore.metric.host") // (returns "127.0.0.1")
-GetString("datastore.metric.other", "default") // (returns "default")
+GetString("title") // (returns "TOML Example")
+GetString("database.server", "127.0.0.1") // (returns "192.168.1.1")
+GetString("database.username", "root") // (returns "root")
+GetString("database.password") // (returns "")
 ```
