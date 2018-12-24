@@ -1,20 +1,16 @@
 package env
 
 import (
-	"fmt"
 	"path"
 	"time"
 
 	"github.com/spf13/viper"
 )
 
-func Load(filePath string) {
+func Load(filePath string) error {
 	viper.SetConfigName(path.Base(filePath))
 	viper.AddConfigPath(path.Dir(filePath))
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
-	}
+	return viper.ReadInConfig()
 }
 
 func Get(key string, defaultValue ...interface{}) interface{} {
