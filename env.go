@@ -17,6 +17,10 @@ func Load(filePath string) {
 	}
 }
 
+func Get(key string, defaultValue ...interface{}) interface{} {
+	return GetValue(key, defaultValue...)
+}
+
 func GetValue(key string, defaultValue ...interface{}) interface{} {
 	if len(defaultValue) > 0 {
 		viper.SetDefault(key, defaultValue[0])
