@@ -97,3 +97,7 @@ func GetDuration(key string, defaultValue ...time.Duration) time.Duration {
 func AllSettings() map[string]interface{} {
 	return viper.AllSettings()
 }
+
+func Unmarshal(rawVal interface{}, opts ...viper.DecoderConfigOption) error {
+	return viper.Unmarshal(rawVal, opts...)
+}
