@@ -7,9 +7,16 @@ import (
 	"github.com/spf13/viper"
 )
 
-func Load(filePath string) error {
-	viper.SetConfigName(path.Base(filePath))
-	viper.AddConfigPath(path.Dir(filePath))
+func Load(configName string, filePaths ...string) error {
+	viper.SetConfigName(path.Base(configName))
+	if len(filePaths) > 0 {
+		for _, filePath := range filePaths {
+			viper.AddConfigPath(path.Dir(filePath))
+		}
+	} else {
+		viper.AddConfigPath(path.Dir(configName))
+	}
+
 	return viper.ReadInConfig()
 }
 
